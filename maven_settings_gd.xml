@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<servers>
+		<server>
+			<id>autonaviLan</id>
+			<username>deployment</username>
+			<password>autonavi</password>
+		</server>
+		<server>
+            <id>snapshots</id>
+            <username>snapshotsAdmin</username>
+            <password>123456</password>
+        </server>
+        <server>
+        	<id>releases</id>
+            <username>admin</username>
+            <password>screct</password>
+        </server>
+	</servers>
+	<mirrors>
+		<!--
+		<mirror>
+			<id>alibaba-inc</id>
+			<mirrorOf>*</mirrorOf>
+			<url>http://repo.alibaba-inc.com/nexus/content/repositories/public/</url>
+		</mirror>
+		-->
+
+		<mirror>
+			<id>repo.jenkins-ci.org</id>
+			<mirrorOf>repo.jenkins-ci.org</mirrorOf>
+			<url>http://repo.jenkins-ci.org/public/</url>
+		</mirror>
+		<mirror>
+			<id>alibaba-inc</id>
+			<mirrorOf>alibaba-inc</mirrorOf>
+			<url>http://mvnrepo.alibaba-inc.com/nexus/content/groups/public/</url>
+		</mirror>
+		<mirror>
+            <id>tbmirror-all</id>
+            <mirrorOf>tbmirror-all</mirrorOf>
+            <name>taobao mirror</name>
+            <url>http://mvnrepo.alibaba-inc.com/mvn/repository</url>
+        </mirror>
+	</mirrors>
+	<profiles>
+		<profile>
+			<id>nexus</id>
+			<!--Enable snapshots for the built in central repo to direct -->
+			<!--all requests to nexus via the mirror -->
+			<repositories>
+				<repository>
+						<id>central</id>
+						<url>http://mvnrepo.alibaba-inc.com/mvn/repository</url>
+				</repository>
+				<repository>
+					<name>alibaba-inc</name>
+					<id>alibaba-inc</id>
+					<url>http://mvnrepo.alibaba-inc.com/nexus/content/repositories/central/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>repo.jenkins-ci.org</id>
+					<url>http://repo.jenkins-ci.org/public/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+                    	<id>central</id>
+                    	<url>http://mvnrepo.alibaba-inc.com/mvn/repository</url>
+                </pluginRepository>
+			</pluginRepositories>
+			 <properties>
+				<allow.google.tracking>false</allow.google.tracking>
+				<skipAllPrompts>true</skipAllPrompts>
+				<jar.scope>compile</jar.scope>
+			 </properties>
+		</profile>
+	</profiles>
+	<activeProfiles>
+		<!--make the profile active all the time -->
+		<activeProfile>nexus</activeProfile>
+	</activeProfiles>
+	<localRepository>/Users/cter/.m2/repository</localRepository>
+</settings>
